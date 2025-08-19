@@ -192,7 +192,7 @@ def run_bot():
 
 def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
+    payload = {"chat_id": CHAT_ID, "text": message}
     try:
         requests.post(url, json=payload)
     except Exception as e:

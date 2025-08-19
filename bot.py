@@ -187,6 +187,21 @@ def run_bot():
         except Exception as e:
             print("Error filtering:", e)
 
+# Add this function where you send Telegram alerts
+#Telegram message that shows that the code fires
+
+def send_telegram_message(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
+    try:
+        requests.post(url, json=payload)
+    except Exception as e:
+        print(f"Error sending message: {e}")
 
 if __name__ == "__main__":
-    run_bot()
+    try:
+        # run all your scanning functions here
+        run_bot()
+    finally:
+        # Send a heartbeat every time the cron job runs
+        send_telegram_message("✅ Bot scan completed and is alive.")
